@@ -26,3 +26,4 @@ Features:
 - [ ] **Cloud Sync:** Allow users to save their profiles, watchlists, and history to the cloud so it syncs across devices.
 - [ ] **Custom Video Player:** Replace the default web player with a custom UI (custom play/pause, subtitles, and volume controls).
 - [ ] **Chromecast / AirPlay:** Add the ability to cast movies directly to a smart TV.
+- [ ] **API Key Instructions:** Add step-by-step instructions on how to get an API key.
