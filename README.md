@@ -19,7 +19,7 @@ Features:
 
 ## 🚀 Planned Features
 
-- [ x ] **Watch Trailers:** Add a button to view YouTube trailers on the movie/show details page.
+- [x] **Watch Trailers:** Add a button to view YouTube trailers on the movie/show details page.
 - [ ] **Cast & Crew:** Add a section showing the main actors and their photos.
 - [ ] **Similar / Recommended:** Show a list of related movies or shows at the bottom of the details page.
 - [ ] **Episode Progress Tracking:** Remember exactly what timestamp a user left off on in a video.
