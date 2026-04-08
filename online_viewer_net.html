@@ -1,11 +1,15 @@
+<!-- prettier-ignore -->
 <!DOCTYPE html>
+
+<!-- prettier-ignore -->
 <html lang="en" class="bg-black" style="background-color: #000;">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="A polished, single-page TMDb-powered movie/tv browser app.">
     <title>CORE // ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@500;700;800&display=swap" rel="stylesheet">
@@ -19,19 +23,19 @@
             --glass-bg: rgba(15, 15, 15, 0.6);
         }
 
-        html { 
-            background-color: var(--bg-base) !important; 
-            color-scheme: dark !important; 
+        html {
+            background-color: var(--bg-base) !important;
+            color-scheme: dark !important;
             scroll-behavior: smooth;
         }
-        
-        body { 
-            background-color: var(--bg-base) !important; 
-            color: #e2e8f0; 
-            font-family: 'Outfit', sans-serif; 
+
+        body {
+            background-color: var(--bg-base) !important;
+            color: #e2e8f0;
+            font-family: 'Outfit', sans-serif;
             margin: 0; padding: 0; 
-            min-height: 100vh; 
-            overflow-x: hidden; 
+            min-height: 100vh;
+            overflow-x: hidden;
             position: relative;
             -webkit-user-select: none;
             user-select: none;
@@ -54,15 +58,15 @@
         .text-accent { color: var(--accent) !important; }
         .bg-accent { background-color: var(--accent) !important; color: #000 !important; }
         .border-accent { border-color: var(--accent) !important; }
-        
+
         .hover-text-accent:hover { color: var(--accent) !important; text-shadow: 0 0 15px rgba(var(--accent-rgb), 0.5); }
         .hover-border-accent:hover { border-color: var(--accent) !important; box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.2); }
         .hover-bg-accent:hover { background-color: var(--accent) !important; color: #000 !important; box-shadow: 0 0 25px rgba(var(--accent-rgb), 0.4); }
-        
+
         .group:hover .group-hover-text-accent { color: var(--accent) !important; }
         .group:hover .group-hover-border-accent { border-color: var(--accent) !important; }
-        
-        .focus-within-ring-accent:focus-within { 
+
+        .focus-within-ring-accent:focus-within {
             outline: none;
             box-shadow: 0 0 0 2px #000, 0 0 0 4px var(--accent), 0 0 20px rgba(var(--accent-rgb), 0.5);
         }
@@ -85,7 +89,7 @@
             min-width: 48px;
             min-height: 48px;
         }
-        
+
         @media (hover: hover) and (pointer: fine) {
             .btn-glass:hover {
                 background: rgba(var(--accent-rgb), 0.1);
@@ -107,7 +111,7 @@
             min-width: 48px;
             min-height: 48px;
         }
-        
+
         @media (hover: hover) and (pointer: fine) {
             .btn-glow:hover {
                 box-shadow: 0 0 40px rgba(var(--accent-rgb), 0.6);
@@ -116,7 +120,7 @@
         }
         .btn-glow:active { transform: scale(0.95); }
 
-        .media-card { 
+        .media-card {
             position: relative;
             border-radius: 1.25rem;
             overflow: hidden;
@@ -125,11 +129,12 @@
             transition: transform 0.2s ease-out, border-color 0.4s, box-shadow 0.4s;
             transform: translate3d(0,0,0); 
             will-change: transform, box-shadow;
+            cursor: pointer;
         }
-        
+
         @media (hover: hover) and (pointer: fine) {
-            .media-card:hover { 
-                transform: translate3d(0, -8px, 0) scale(1.03); 
+            .media-card:hover {
+                transform: translate3d(0, -8px, 0) scale(1.03);
                 border-color: rgba(var(--accent-rgb), 0.5);
                 box-shadow: 0 20px 40px -10px rgba(0,0,0,0.8), 0 0 30px -10px rgba(var(--accent-rgb), 0.3); 
                 z-index: 20;
@@ -152,16 +157,16 @@
         .ticker-wrap {
             overflow: hidden; white-space: nowrap;
             background: linear-gradient(90deg, transparent, rgba(var(--accent-rgb), 0.05) 50%, transparent);
-            border-y: 1px solid rgba(255,255,255,0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.05); border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             transform: translateZ(0);
         }
         .ticker-content { display: inline-block; animation: ticker 25s linear infinite; will-change: transform; }
         @keyframes ticker { 0% { transform: translate3d(100vw, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
 
-        .nav-link { 
-            position: relative; 
+        .nav-link {
+            position: relative;
             color: rgba(255,255,255,0.6);
-            transition: all 0.3s; 
+            transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -177,7 +182,7 @@
             box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
             transform: translateZ(0);
         }
-        
+
         .skeleton-container::before {
             content: ""; position: absolute; inset: 0;
             background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
@@ -218,22 +223,26 @@
         .bottom-sheet.open {
             transform: translateY(0);
         }
+
+        option { background-color: var(--bg-base); }
     </style>
 </head>
 <body class="text-slate-200">
 
     <div id="global-bg" class="fixed inset-0 z-[-3] bg-cover bg-center transition-opacity duration-1000 opacity-0 pointer-events-none transform translate-z-0"></div>
 
-    <div id="app" class="w-full min-h-screen relative z-10 transition-colors duration-1000"></div>
+    <div id="app" role="main" class="w-full min-h-screen relative z-10 transition-colors duration-1000"></div>
     <div id="modal-root"></div>
 
     <script>
-        const API_KEY = '64c0ee366784fff0886ad95418f4a19c';
+        // Use user-provided API key stored in localStorage
+        let API_KEY = localStorage.getItem('tmdb_api_key') || '';
+        
         const BASE_URL = 'https://api.themoviedb.org/3';
         const IMG_ORIGINAL = 'https://image.tmdb.org/t/p/original';
         const IMG_W500 = 'https://image.tmdb.org/t/p/w500';
         const IMG_W185 = 'https://image.tmdb.org/t/p/w185';
-        
+
         const ACCENT_COLORS =[
             { name: 'Pastel Lilac', hex: '#E2D4E0' }, { name: 'Muted Mauve', hex: '#8C6B77' },
             { name: 'Rich Burgundy', hex: '#4A2E35' }, { name: 'Dark Navy', hex: '#2E3B4E' },
@@ -246,12 +255,12 @@
             { name: "Marvel Cinematic Universe", items:[ { id: 1726, type: 'movie' }, { id: 24428, type: 'movie' }, { id: 299534, type: 'movie' }, { id: 84958, type: 'tv' } ] },
             { name: "Star Wars Saga", items:[ { id: 11, type: 'movie' }, { id: 1891, type: 'movie' }, { id: 1892, type: 'movie' }, { id: 82856, type: 'tv' } ] },
             { name: "DC Extended Universe", items:[ { id: 272, type: 'movie' }, { id: 49026, type: 'movie' }, { id: 297762, type: 'movie' }, { id: 110492, type: 'tv' } ] },
-            { name: "Wizarding World", items:[ { id: 671, type: 'movie' }, { id: 672, type: 'movie' }, { id: 12444, type: 'movie' }, { id: 12445, type: 'movie' } ] },
+            { name: "Wizarding World", items:[ { id: 671, type: 'movie' }, { id: 672, type: 'movie' }, { id: 673, type: 'movie' }, { id: 674, type: 'movie' }, { id: 675, type: 'movie' }, { id: 767, type: 'movie' }, { id: 12444, type: 'movie' }, { id: 12445, type: 'movie' } ] },
             { name: "Middle Earth", items:[ { id: 120, type: 'movie' }, { id: 121, type: 'movie' }, { id: 122, type: 'movie' }, { id: 84773, type: 'tv' } ] }
         ];
 
-        let state = { 
-            view: 'profiles', lastMainView: 'home', currentMediaId: null, currentMediaType: null, currentUser: null, 
+        let state = {
+            view: 'profiles', lastMainView: 'home', currentMediaId: null, currentMediaType: null, currentUser: null,
             profiles: JSON.parse(localStorage.getItem('profiles_v3')) ||[], watchlist:[], continueWatching:[], franchiseData: null,
             genres: { movie: [], tv:[] },
             filters: { movie: { page: 1, sort_by: 'popularity.desc', year: '', genre: '', rating: '' }, tv: { page: 1, sort_by: 'popularity.desc', year: '', genre: '', rating: '' } }
@@ -290,7 +299,7 @@
 
         const skeletonCard = (n=6) => `<div class="media-card aspect-[2/3] skeleton-container border-0 rounded-[1.25rem]">${techCardInner()}</div>`.repeat(n);
         const folderSkeleton = (n=4) => `<div class="media-card aspect-video skeleton-container border-0 rounded-[1.25rem]">${folderSkeletonInner()}</div>`.repeat(n);
-        
+
         const rowSkeleton = (title) => `
             <section class="w-full mb-10 md:mb-12">
                 <h3 class="font-mono-tech text-xs tracking-[0.2em] text-gray-500 mb-4 md:mb-6 uppercase border-l-2 border-white/10 pl-4 ml-6 md:ml-12">${title}</h3>
@@ -365,13 +374,13 @@
 
         function saveToStorage(key, data) { try { localStorage.setItem(key, JSON.stringify(data)); } catch(e){} }
         function saveProfiles() { saveToStorage('profiles_v3', state.profiles); }
-        
+
         function selectProfile(profileName) {
             state.currentUser = state.profiles.find(p => p.name === profileName);
             if (!state.currentUser) return;
             document.documentElement.style.setProperty('--accent', state.currentUser.color || '#E2D4E0');
             document.documentElement.style.setProperty('--accent-rgb', hexToRgb(state.currentUser.color || '#E2D4E0'));
-            
+
             state.watchlist = JSON.parse(localStorage.getItem(`${state.currentUser.name}_wl`)) ||[];
             state.continueWatching = JSON.parse(localStorage.getItem(`${state.currentUser.name}_cw`)) ||[];
             setView('home');
@@ -389,7 +398,7 @@
         function getSources(id, type, s, e, imdbId) {
             const tmdb = id;
             const hexColor = (state.currentUser?.color || '#E2D4E0').replace('#', '');
-            
+
             if (type === 'movie') {
                 const sources =[
                     { name: 'VidSrc Prime 1', url: `https://vidsrc.wtf/api/1/movie/?id=${tmdb}&color=${hexColor}` },
@@ -438,7 +447,7 @@
             }
             return state.franchiseData;
         };
-        
+
         window.observeLogos = () => {
             if (!window.logoObserver) {
                 window.logoObserver = new IntersectionObserver((entries, observer) => {
@@ -448,7 +457,7 @@
                             const id = el.dataset.id;
                             const type = el.dataset.type;
                             const isList = el.dataset.list === 'true';
-                            
+
                             if(el.dataset.fetching) return;
                             el.dataset.fetching = "true";
 
@@ -459,11 +468,11 @@
                                     if (logo && logo.file_path) {
                                         const img = new Image();
                                         img.src = `${IMG_W500}${logo.file_path}`;
-                                        
-                                        let extraClass = isList 
-                                            ? "max-h-[35px] group-hover:scale-105" 
+
+                                        let extraClass = isList
+                                            ? "max-h-[35px] group-hover:scale-105"
                                             : "max-h-[60px] translate-y-0 group-hover:scale-[1.02]";
-                                            
+
                                         img.className = `w-auto max-w-full object-contain object-left drop-shadow-[0_4px_10px_rgba(0,0,0,0.9)] transition-transform duration-500 fade-in ${extraClass}`;
                                         img.alt = "Logo";
 
@@ -477,9 +486,9 @@
                             observer.unobserve(el);
                         }
                     });
-                }, { rootMargin: '300px' }); 
+                }, { rootMargin: '300px' });
             }
-            
+
             document.querySelectorAll('.title-logo-target:not(.observed)').forEach(el => {
                 el.classList.add('observed');
                 window.logoObserver.observe(el);
@@ -558,7 +567,7 @@
             const container = document.getElementById('episode-container');
             container.innerHTML = `<div class="font-mono-tech p-10 animate-pulse text-center w-full text-accent tracking-widest text-sm">Loading Season ${seasonNum}...</div>`;
             const data = await fetchAPI(`/tv/${showId}/season/${seasonNum}`);
-            
+
             if (!data || !data.episodes) return container.innerHTML = `<div class="p-8 text-red-500 text-center font-mono-tech">Failed to load episodes.</div>`;
 
             container.innerHTML = `
@@ -573,7 +582,7 @@
             const sources = window.currentSources ||[];
             const activeIdx = window.currentServerIndex || 0;
             const root = document.getElementById('modal-root');
-            
+
             root.innerHTML = `
                 <div class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-end justify-center z-[200] transition-all duration-500 fade-in" onclick="closeModal()">
                     <div id="bottom-sheet" class="bottom-sheet w-full max-w-2xl bg-[#0a0a0a]/95 backdrop-blur-2xl rounded-t-[2rem] p-6 pb-[max(2rem,env(safe-area-inset-bottom))] shadow-[0_-10px_50px_rgba(0,0,0,0.8)] border-t border-white/10 relative" onclick="event.stopPropagation()">
@@ -600,7 +609,7 @@
             const sources = window.currentSources;
             if (!sources || !sources[index]) return;
             window.currentServerIndex = index;
-            
+
             const frame = document.getElementById('video-frame');
             if (frame) {
                 frame.style.opacity = '0';
@@ -608,10 +617,10 @@
                     frame.src = sources[index].url;
                 }, 300);
             }
-            
+
             const btn = document.getElementById('current-server-btn');
             if (btn) btn.innerHTML = `Server: ${sources[index].name} <svg class="w-4 h-4 ml-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>`;
-            
+
             closeModal();
         };
 
@@ -621,22 +630,22 @@
         function getMediaCard(m, type, delayIndex = 0, deleteActionStr = null, extraClasses = '') {
             const title = esc(m.title || m.name);
             const imgPath = m.poster_path ? IMG_W500 + m.poster_path : '';
-            const action = type === 'player' 
+            const action = type === 'player'
                 ? (m.season !== undefined ? `setView('player', ${m.id}, 'tv', ${m.season}, ${m.episode})` : `setView('player', ${m.id}, 'movie')`)
                 : `setView('details', ${m.id}, '${type}')`;
 
-            const delBtn = deleteActionStr 
-                ? `<button onclick="${deleteActionStr}" class="absolute top-3 right-3 z-30 bg-black/60 backdrop-blur-sm border border-white/20 text-white rounded-full min-h-[48px] min-w-[48px] flex items-center justify-center text-xl transition-all active:scale-90 active:bg-red-600 outline-none" title="Remove">&times;</button>` 
+            const delBtn = deleteActionStr
+                ? `<button onclick="${deleteActionStr}" class="absolute top-3 right-3 z-30 bg-black/60 backdrop-blur-sm border border-white/20 text-white rounded-full min-h-[48px] min-w-[48px] flex items-center justify-center text-xl transition-all active:scale-90 active:bg-red-600 outline-none" title="Remove">&times;</button>`
                 : '';
 
             return `
                 <div style="animation-delay: ${delayIndex * 30}ms" class="anim-item media-card cursor-pointer focus-within-ring-accent ${extraClasses}" tabindex="0">
                     <div onclick="${action}" class="absolute inset-0 z-10 w-full h-full"></div>
                     ${delBtn}
-                    ${imgPath 
-                        ? `<img src="${imgPath}" loading="lazy" decoding="async" alt="${title}" class="w-full h-full object-cover">`
-                        : `<div class="w-full h-full bg-[#111] flex items-center justify-center p-4 text-center"><span class="font-display text-sm text-gray-500">${title}</span></div>`
-                    }
+                    ${imgPath
+                    ? `<img src="${imgPath}" loading="lazy" decoding="async" alt="${title}" class="w-full h-full object-cover">`
+                    : `<div class="w-full h-full bg-[#111] flex items-center justify-center p-4 text-center"><span class="font-display text-sm text-gray-500">${title}</span></div>`
+                }
                     <div class="card-overlay absolute inset-0 z-0 pointer-events-none flex flex-col justify-end p-4 lg:p-5 opacity-100 bg-gradient-to-t from-black via-black/80 to-transparent">
                         <div class="title-logo-target w-full" data-id="${m.id}" data-type="${type}" style="opacity: 1;">
                             <p class="font-display font-bold text-white text-sm md:text-base leading-tight drop-shadow-lg">${title}</p>
@@ -655,7 +664,7 @@
                 let actionStr = type === 'player' ? `removeFromContinueWatching(${m.id}, event)` : null;
                 return getMediaCard(m, type, i, actionStr, extraClasses);
             }).join('');
-            
+
             return `
                 <section class="w-full ${isFirst ? 'relative z-30 mb-10 md:mb-12' : 'mb-10 md:mb-12'} fade-in">
                     <h3 class="font-mono-tech text-xs tracking-[0.2em] text-gray-400 mb-4 md:mb-6 uppercase border-l-2 ${isFirst ? 'border-accent text-accent' : 'border-white/20'} pl-4 ml-6 md:ml-12 drop-shadow-lg">${title}</h3>
@@ -666,7 +675,7 @@
                 </section>
             `;
         }
-        
+
         function getSideListCard(m, type) {
             const title = esc(m.title || m.name);
             return `
@@ -683,23 +692,23 @@
         }
 
         async function setView(view, id = null, type = 'movie', extra1 = null, extra2 = null, extra3 = null) {
-            if (!['player', 'details', 'createProfile', 'profiles'].includes(view)) state.lastMainView = view;
+            if (!['setup', 'player', 'details', 'createProfile', 'profiles'].includes(view)) state.lastMainView = view;
             if (['details', 'player'].includes(view)) { state.currentMediaId = id; state.currentMediaType = type; }
 
             state.view = view;
             const app = document.getElementById('app');
-            
+
             const globalBg = document.getElementById('global-bg');
             if (view !== 'details') { globalBg.classList.replace('opacity-40', 'opacity-0'); }
 
             const profileOrbNav = state.currentUser ? `
-                <div class="w-8 h-8 rounded-full flex items-center justify-center font-display text-xs font-bold text-white shadow-lg border border-white/20" 
+                <div class="w-8 h-8 rounded-full flex items-center justify-center font-display text-xs font-bold text-white shadow-lg border border-white/25 !bg-clip-padding" 
                      style="background: linear-gradient(135deg, ${state.currentUser.color}, transparent); box-shadow: 0 0 10px ${state.currentUser.color}60;">
                     ${getInitial(state.currentUser.name)}
                 </div>` : '';
 
-            const nav =['profiles', 'createProfile'].includes(view) ? '' : `
-                <nav class="fixed z-[100] glass-panel bottom-0 left-0 w-full h-[calc(4.5rem+env(safe-area-inset-bottom))] pb-[env(safe-area-inset-bottom)] flex justify-around items-center px-2 md:px-4 rounded-t-3xl border-x-0 border-b-0 md:bottom-auto md:top-0 md:left-0 md:w-[6.5rem] md:h-full md:flex-col md:justify-center md:pb-0 md:pt-[env(safe-area-inset-top)] md:rounded-r-3xl md:border-y-0">
+            const nav =['setup', 'profiles', 'createProfile'].includes(view) ? '' : `
+                <nav role="navigation" class="fixed z-[100] glass-panel bottom-0 left-0 w-full h-[calc(4.5rem+env(safe-area-inset-bottom))] pb-[env(safe-area-inset-bottom)] flex justify-around items-center px-2 md:px-4 rounded-t-3xl border-x-0 border-b-0 md:bottom-auto md:top-0 md:left-0 md:w-[6.5rem] md:h-full md:flex-col md:justify-center md:pb-0 md:pt-[env(safe-area-inset-top)] md:rounded-r-3xl md:border-y-0">
                     <button onclick="setView('home')" class="nav-link min-h-[48px] min-w-[48px] p-2 rounded-xl active:bg-white/10 ${view === 'home' ? 'nav-active text-accent' : ''}" title="Home"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg></button>
                     <button onclick="setView('movies')" class="nav-link min-h-[48px] min-w-[48px] p-2 rounded-xl active:bg-white/10 ${view === 'movies' ? 'nav-active text-accent' : ''}" title="Movies"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"></path></svg></button>
                     <button onclick="setView('shows')" class="nav-link min-h-[48px] min-w-[48px] p-2 rounded-xl active:bg-white/10 ${view === 'shows' ? 'nav-active text-accent' : ''}" title="TV Shows"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg></button>
@@ -712,29 +721,51 @@
                     </button>
                 </nav>`;
 
-            const layoutClass =['profiles', 'createProfile'].includes(view) 
-                ? 'w-full min-h-screen flex items-center justify-center relative' 
-                : (view === 'home' 
-                    ? 'w-full pl-0 md:pl-[6.5rem] pb-[calc(5rem+env(safe-area-inset-bottom))] md:pb-0 relative pt-[max(1.5rem,env(safe-area-inset-top))]' 
+            const layoutClass =['setup', 'profiles', 'createProfile'].includes(view) 
+                ? 'w-full min-h-screen flex items-center justify-center relative'
+                : (view === 'home'
+                    ? 'w-full pl-0 md:pl-[6.5rem] pb-[calc(5rem+env(safe-area-inset-bottom))] md:pb-0 relative pt-[max(1.5rem,env(safe-area-inset-top))]'
                     : 'max-w-[1600px] mx-auto px-6 md:px-12 pl-6 md:pl-[calc(6.5rem+3rem)] pb-[calc(5rem+env(safe-area-inset-bottom))] md:pb-24 pt-[max(1.5rem,env(safe-area-inset-top))] relative main-container');
-            
+
             app.className = `${layoutClass} z-10`;
 
-            if (view === 'profiles') {
-                document.documentElement.style.setProperty('--accent', '#E2D4E0'); 
-                document.documentElement.style.setProperty('--accent-rgb', '226, 212, 224'); 
+            if (view === 'setup') {
+                document.documentElement.style.setProperty('--accent', '#E2D4E0');
                 
+                app.innerHTML = `
+                    <div class="w-full min-h-screen flex flex-col items-center justify-center px-6 relative z-10 anim-item">
+                        <div class="glass-panel p-10 md:p-16 rounded-[2rem] text-center max-w-lg w-full">
+                            <h1 class="font-display text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">Initial Setup</h1>
+                            <p class="font-mono-tech text-xs tracking-[0.1em] text-gray-400 mb-8 leading-relaxed">Please enter your TMDb API Key (v3 Auth) to continue. You can get one for free at themoviedb.org.</p>
+                            <input id="api-key-input" type="text" placeholder="Enter TMDb API Key" class="w-full bg-black/50 border border-white/20 rounded-xl px-4 py-3 font-mono-tech text-sm text-center outline-none text-white focus:border-accent transition-colors mb-6 min-h-[48px]">
+                            <button id="save-api-key" class="btn-glow w-full rounded-xl font-display font-bold text-sm tracking-widest uppercase py-3 outline-none">Save & Continue</button>
+                        </div>
+                    </div>
+                `;
+
+                document.getElementById('save-api-key').onclick = () => {
+                    const key = document.getElementById('api-key-input').value.trim();
+                    if (!key) return alert('API Key is required to use this application.');
+                    localStorage.setItem('tmdb_api_key', key);
+                    API_KEY = key;
+                    setView('profiles');
+                };
+            }
+            else if (view === 'profiles') {
+                document.documentElement.style.setProperty('--accent', '#E2D4E0');
+                document.documentElement.style.setProperty('--accent-rgb', '226, 212, 224');
+
                 app.innerHTML = `
                     <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_0%,transparent_70%)] pointer-events-none z-0"></div>
                     <div class="relative z-10 w-full max-w-5xl px-6 flex flex-col items-center pt-[max(2rem,env(safe-area-inset-top))]">
                         <h1 class="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4 text-white drop-shadow-2xl text-center anim-item">Who's Watching?</h1>
                         <p class="font-mono-tech text-xs uppercase tracking-[0.3em] text-gray-500 mb-20 text-center anim-item" style="animation-delay: 100ms">Choose a profile to continue</p>
                         
-                        <div class="flex flex-wrap justify-center gap-10 md:gap-16 mb-24">
+                        <div class="flex flex-wrap justify-center gap-10 md:gap-16 mb-20">
                             ${state.profiles.map((p, i) => `
                                 <div style="animation-delay: ${i*100 + 200}ms" class="anim-item text-center group relative">
-                                    <button onclick="selectProfile('${esc(p.name)}')" class="block outline-none cursor-pointer focus-within-ring-accent rounded-full relative z-10 active:scale-95 transition-transform">
-                                        <div class="w-28 h-28 md:w-36 md:h-36 rounded-full flex items-center justify-center font-display text-5xl md:text-6xl text-white font-bold border border-white/10" 
+                                    <button onclick="selectProfile('${esc(p.name)}')" class="block outline-none cursor-pointer rounded-full relative z-10 active:scale-95 transition-transform">
+                                        <div class="w-28 h-28 md:w-36 md:h-36 rounded-full flex items-center justify-center font-display text-5xl md:text-6xl text-white font-bold border border-white/25 !bg-clip-padding" 
                                              style="background: linear-gradient(135deg, ${p.color}90, transparent); box-shadow: 0 15px 40px -10px ${p.color}80, inset 0 0 20px rgba(0,0,0,0.5);">
                                             ${getInitial(p.name)}
                                         </div>
@@ -748,8 +779,12 @@
                         <button onclick="setView('createProfile')" class="anim-item btn-glass px-10 rounded-full font-mono-tech text-xs tracking-widest uppercase text-gray-400 flex items-center justify-center gap-3" style="animation-delay: ${state.profiles.length * 100 + 300}ms">
                             <span class="text-lg leading-none">+</span> Add Profile
                         </button>
+
+                        <button onclick="localStorage.removeItem('tmdb_api_key'); location.reload();" class="mt-20 font-mono-tech text-[10px] tracking-[0.2em] uppercase text-gray-600 hover:text-red-400 transition-colors bg-transparent border-none cursor-pointer p-2">
+                            Reset API Key
+                        </button>
                     </div>`;
-            } 
+            }
             else if (view === 'createProfile') {
                 document.documentElement.style.setProperty('--accent', '#E2D4E0');
                 tempState.selectedColor = ACCENT_COLORS[0].hex;
@@ -791,7 +826,7 @@
                     document.querySelectorAll('.color-btn').forEach(btn => {
                         btn.style.boxShadow = 'none'; btn.style.borderColor = 'transparent'; btn.style.transform = 'scale(1)';
                     });
-                    el.style.boxShadow = `0 0 30px ${hex}80, inset 0 0 10px rgba(0,0,0,0.2)`; 
+                    el.style.boxShadow = `0 0 30px ${hex}80, inset 0 0 10px rgba(0,0,0,0.2)`;
                     el.style.borderColor = 'white';
                     el.style.transform = 'scale(1.15)';
                 };
@@ -801,7 +836,7 @@
                     const name = document.getElementById('profile-name-input').value.trim();
                     if (!name) return alert('Profile name is required.');
                     if (state.profiles.some(p => p.name.toLowerCase() === name.toLowerCase())) return alert('A profile with this name already exists.');
-                    
+
                     state.profiles.push({ name, color: tempState.selectedColor });
                     saveProfiles();
                     setView('profiles');
@@ -819,7 +854,7 @@
                         <div id="franchise-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">${folderSkeleton(6)}</div>
                     </div>
                 `;
-                
+
                 fetchFranchises().then(fData => {
                     if(!fData) return;
                     const grid = document.getElementById('franchise-grid');
@@ -839,12 +874,14 @@
                 });
             }
             else if (view === 'franchise') {
-                const franchise = FRANCHISES[id];
+                if (id !== null) {state.lastFranchiseId = id; state.lastFranchiseType = type;}
+
+                const franchise = FRANCHISES[id == null ? state.lastFranchiseId : id];
                 app.innerHTML = nav + `
                     <div id="content" class="w-full">
                         <div class="mb-12 flex flex-col md:flex-row items-start md:items-end justify-between gap-6 anim-item border-b border-white/10 pb-6">
                             <div>
-                                <h2 class="font-display text-4xl text-white font-bold tracking-tight drop-shadow-md">${esc(type)}</h2>
+                                <h2 class="font-display text-4xl text-white font-bold tracking-tight drop-shadow-md">${esc(type==='movie' ? (state.lastFranchiseType||"movie") : type)}</h2>
                                 <p class="font-mono-tech text-xs tracking-[0.2em] text-accent uppercase mt-2">Collection Items</p>
                             </div>
                             <button onclick="setView('collections')" class="btn-glass px-6 rounded-lg font-mono-tech text-[10px] tracking-widest uppercase text-gray-400 flex items-center justify-center">Back to Collections</button>
@@ -885,7 +922,7 @@
                             <div id="slot-incoming"></div>
                         </div>
                     </div>`;
-                
+
                 if (state.continueWatching.length > 0) {
                     document.getElementById('slot-cw').innerHTML = createRowHTML('Continue Watching', state.continueWatching, 'player', true);
                 }
@@ -893,8 +930,8 @@
 
                 fetchAPI('/trending/movie/week').then(async trM => {
                     if (!trM) return;
-                    const h = trM.results[0]; 
-                    
+                    const h = trM.results[0];
+
                     let heroTitleHtml = `<h1 class="font-display text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter text-white drop-shadow-[0_0_20px_rgba(0,0,0,0.8)] leading-tight max-w-4xl">${esc(h.title || h.name)}</h1>`;
                     try {
                         const lData = await fetchAPI(`/${h.media_type || 'movie'}/${h.id}/images`, '&include_image_language=en,null');
@@ -905,7 +942,7 @@
                     } catch(e) {}
 
                     document.getElementById('slot-hero').innerHTML = `
-                        <header class="relative w-full h-[75vh] md:h-[85vh] flex flex-col justify-end isolate bg-black fade-in pt-[max(1.5rem,env(safe-area-inset-top))]">
+                        <header role="banner" class="relative w-full h-[75vh] md:h-[85vh] flex flex-col justify-end isolate bg-black fade-in pt-[max(1.5rem,env(safe-area-inset-top))]">
                             <div id="hero-bg" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out z-[-2] opacity-0 transform translate-z-0"></div>
                             <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg-base)] via-[var(--bg-base)]/50 to-transparent z-[-1] pointer-events-none"></div>
                             <div class="absolute inset-0 bg-gradient-to-r from-[var(--bg-base)] via-[var(--bg-base)]/60 to-transparent z-[-1] w-full md:w-[75%] pointer-events-none"></div>
@@ -925,9 +962,7 @@
                                     <button onclick="setView('details', ${h.id}, 'movie')" class="btn-glass px-6 md:px-8 rounded-full font-display font-bold text-xs md:text-sm tracking-widest uppercase flex items-center justify-center gap-2 md:gap-3 text-white">
                                         <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> More Info
                                     </button>
-                                    <button onclick="addToWatchlist(${h.id}, 'movie')" class="btn-glass rounded-full font-display font-bold text-lg tracking-widest text-white flex items-center justify-center" title="Add to Watchlist">
-                                        +
-                                    </button>
+                                    <button onclick="addToWatchlist(${h.id}, 'movie')" class="btn-glass rounded-full font-display font-bold text-lg text-white" title="Add to Watchlist">+</button>
                                 </div>
                             </div>
                         </header>
@@ -1013,7 +1048,7 @@
                     `;
                     if (window.observeLogos) window.observeLogos();
                 });
-            } 
+            }
             else if (['movies', 'shows'].includes(view)) {
                 const targetType = view === 'movies' ? 'movie' : 'tv';
                 const isAppend = typeof extra1 === 'boolean' ? extra1 : false;
@@ -1027,7 +1062,7 @@
                     const f = state.filters[targetType];
                     let yearOpts = `<option value="">ALL YEARS</option>`;
                     for(let y = new Date().getFullYear(); y >= 1970; y--) yearOpts += `<option value="${y}" ${f.year == y ? 'selected' : ''}>${y}</option>`;
-                    
+
                     let genreOpts = `<option value="">ALL GENRES</option>`;
                     state.genres[targetType].forEach(g => genreOpts += `<option value="${g.id}" ${f.genre == g.id ? 'selected' : ''}>${esc(g.name).toUpperCase()}</option>`);
 
@@ -1037,14 +1072,14 @@
                                 <div class="flex flex-col md:flex-row gap-6 items-center">
                                     <h3 class="font-mono-tech text-[10px] tracking-[0.2em] text-accent uppercase min-w-max border-r border-white/10 pr-6 hidden md:block">Filters</h3>
                                     <div class="grid grid-cols-2 md:grid-cols-5 gap-4 w-full">
-                                        <select onchange="updateFilter('${targetType}', 'sort_by', this.value)" class="input-glass rounded-lg px-4 font-mono-tech text-[10px] uppercase tracking-widest text-white outline-none w-full">
+                                        <select onchange="updateFilter('${targetType}', 'sort_by', this.value)" class="input-glass rounded-lg px-4 font-mono-tech text-[10px] uppercase tracking-widest text-white outline-none w-full cursor-pointer">
                                             <option value="popularity.desc" ${f.sort_by === 'popularity.desc' ? 'selected' : ''}>Most Popular</option>
                                             <option value="${targetType === 'movie' ? 'primary_release_date.desc' : 'first_air_date.desc'}" ${f.sort_by === (targetType === 'movie' ? 'primary_release_date.desc' : 'first_air_date.desc') ? 'selected' : ''}>Recently Released</option>
                                             <option value="vote_average.desc" ${f.sort_by === 'vote_average.desc' ? 'selected' : ''}>Top Rated</option>
                                         </select>
-                                        <select onchange="updateFilter('${targetType}', 'genre', this.value)" class="input-glass rounded-lg px-4 font-mono-tech text-[10px] uppercase tracking-widest text-white outline-none w-full">${genreOpts}</select>
-                                        <select onchange="updateFilter('${targetType}', 'year', this.value)" class="input-glass rounded-lg px-4 font-mono-tech text-[10px] uppercase tracking-widest text-white outline-none w-full">${yearOpts}</select>
-                                        <select onchange="updateFilter('${targetType}', 'rating', this.value)" class="input-glass rounded-lg px-4 font-mono-tech text-[10px] uppercase tracking-widest text-white outline-none w-full">
+                                        <select onchange="updateFilter('${targetType}', 'genre', this.value)" class="input-glass rounded-lg px-4 font-mono-tech text-[10px] uppercase tracking-widest text-white outline-none w-full cursor-pointer">${genreOpts}</select>
+                                        <select onchange="updateFilter('${targetType}', 'year', this.value)" class="input-glass rounded-lg px-4 font-mono-tech text-[10px] uppercase tracking-widest text-white outline-none w-full cursor-pointer">${yearOpts}</select>
+                                        <select onchange="updateFilter('${targetType}', 'rating', this.value)" class="input-glass rounded-lg px-4 font-mono-tech text-[10px] uppercase tracking-widest text-white outline-none w-full cursor-pointer">
                                             <option value="">ANY RATING</option>
                                             <option value="6" ${f.rating == '6' ? 'selected' : ''}>RATING 6.0+</option>
                                             <option value="8" ${f.rating == '8' ? 'selected' : ''}>RATING 8.0+</option>
@@ -1063,7 +1098,7 @@
                         </div>`;
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
-                
+
                 const f = state.filters[targetType];
                 let queryStr = `&sort_by=${f.sort_by}&page=${f.page}&vote_count.gte=150`;
                 if (f.genre) queryStr += `&with_genres=${f.genre}`;
@@ -1088,12 +1123,13 @@
             }
             else if (view === 'details') {
                 app.innerHTML = nav + `<div class="w-full flex justify-center pt-32 max-w-[1200px] mx-auto">${detailsSkeleton()}</div>`;
-                
+
                 Promise.all([
-                    fetchAPI(`/${type}/${id}`), 
+                    fetchAPI(`/${type}/${id}`),
                     fetchAPI(`/${type}/${id}/credits`),
-                    fetchAPI(`/${type}/${id}/images`, '&include_image_language=en,null')
-                ]).then(([m, credits, lData]) => {
+                    fetchAPI(`/${type}/${id}/images`, '&include_image_language=en,null'),
+                    fetchAPI(`/${type}/${id}/videos`),
+                ]).then(([m, credits, lData, videos]) => {
                     if (!m) return app.innerHTML = nav + `<div class="text-center p-32 font-mono-tech text-red-500 uppercase tracking-widest">Title not found.</div>`;
 
                     window.tempSeasons = m.seasons ||[];
@@ -1116,15 +1152,26 @@
                             detailsTitleHtml = `<img src="${IMG_W500}${logo.file_path}" class="max-w-full md:max-w-[80%] lg:max-w-[70%] max-h-[140px] md:max-h-[200px] object-contain object-left drop-shadow-[0_0_30px_rgba(0,0,0,0.8)]" alt="${esc(m.title || m.name)}">`;
                         }
                     }
-                    
+
+                    let playTrailerAction;
+                    if (videos?.results?.length > 0) {
+                        const trailer = videos.results.find(v => v.type === 'Trailer' && v.site === 'YouTube');
+                        if (trailer) {
+                            playTrailerAction = `setView('trailer', ${id}, '${type}', '${trailer.key}')`;
+                        }
+                    }
+
                     const contentHtml = `
                         <button onclick="setView('${state.lastMainView}')" class="absolute top-[max(1.5rem,env(safe-area-inset-top))] right-[max(1.5rem,env(safe-area-inset-right))] min-w-[48px] min-h-[48px] rounded-full bg-black/50 backdrop-blur-md border border-white/20 flex items-center justify-center text-2xl active:scale-90 z-50 outline-none">&times;</button>
                         <div class="grid lg:grid-cols-[450px,1fr] gap-12 lg:gap-20 relative z-10 pt-[max(2rem,env(safe-area-inset-top))] items-start">
-                            <div class="sticky top-32 glass-panel p-2 rounded-[2rem] overflow-hidden group border border-white/10">
-                                <img src="${m.poster_path ? IMG_W500 + m.poster_path : ''}" loading="lazy" class="w-full rounded-[1.5rem] shadow-2xl transform translate-z-0">
+                            <div class="w-fit h-full lg:h-fit mx-auto sticky top-32 glass-panel p-2 rounded-[2rem] overflow-hidden group border border-white/10">
+                                <img src="${m.poster_path ? IMG_W500 + m.poster_path : ''}" loading="lazy" class="w-auto h-full rounded-[1.5rem] shadow-2xl transform translate-z-0">
+                                ${playTrailerAction ? `<button onclick="${playTrailerAction}" class="btn-glass flex-1 px-8 rounded-2xl font-display font-bold text-sm tracking-widest uppercase flex items-center justify-center gap-3 text-white absolute bottom-6 right-6">
+                                    Watch Trailer
+                                </button>` : ''}
                             </div>
                             
-                            <div class="pt-4">
+                            <div class="mt-4 pt-4 z-10" style="background: linear-gradient(0deg, var(--bg-base) 70%, transparent 100%);">
                                 <div class="w-full mb-6">${detailsTitleHtml}</div>
                                 
                                 ${m.tagline ? `<p class="font-mono-tech text-sm uppercase tracking-[0.2em] text-accent mb-8 border-l-2 border-accent pl-4 py-1">${esc(m.tagline)}</p>` : '<div class="h-8"></div>'}
@@ -1165,7 +1212,7 @@
             else if (view === 'player') {
                 const season = extra1, episode = extra2, imdbId = extra3;
                 let nextEpBtn = '';
-                
+
                 app.innerHTML = nav + `
                     <div class="w-full max-w-[1400px] mx-auto anim-item relative z-10 pt-[max(1.5rem,env(safe-area-inset-top))]">
                         <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-6 border-b border-white/10 pb-6">
@@ -1191,7 +1238,7 @@
                 fetchAPI(`/${type}/${id}`).then(async details => {
                     if (details) {
                         addToContinueWatching({ id, type, title: details.title || details.name, poster_path: details.poster_path, season, episode });
-                        if (type === 'tv') { 
+                        if (type === 'tv') {
                             const sData = await fetchAPI(`/tv/${id}/season/${season}`);
                             let nextS = season, nextE = episode + 1;
                             if (sData && episode >= sData.episodes.length) {
@@ -1201,10 +1248,10 @@
                             if (nextE) nextEpBtn = `<button onclick="setView('player', ${id}, 'tv', ${nextS}, ${nextE})" class="btn-glass px-6 rounded-lg font-mono-tech text-[10px] tracking-widest uppercase text-accent border-accent/50 flex items-center justify-center gap-2 flex-shrink-0">Next Ep &rarr;</button>`;
                         }
                     }
-                    
+
                     window.currentSources = getSources(id, type, season, episode, imdbId);
                     window.currentServerIndex = 0;
-                    
+
                     document.getElementById('player-controls').innerHTML = `
                         <div class="flex gap-3 items-center w-full justify-end">
                             ${nextEpBtn}
@@ -1220,6 +1267,42 @@
                     document.getElementById('player-container').innerHTML = `<iframe id="video-frame" src="${window.currentSources[0].url}" class="absolute inset-0 w-full h-full z-10 bg-black rounded-3xl transition-opacity duration-1000 transform translate-z-0" frameborder="0" allowfullscreen onload="this.style.opacity='1'" style="opacity:0;"></iframe>`;
                 });
             }
+            else if (view === 'trailer') {
+                if (!extra1) setView('details', id, type);
+
+                app.innerHTML = nav + `
+                    <div class="w-full max-w-[1400px] mx-auto anim-item relative z-10 pt-[max(1.5rem,env(safe-area-inset-top))]">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-6 border-b border-white/10 pb-6">
+                            <div>
+                                <h2 class="font-display text-2xl md:text-4xl font-bold text-white tracking-tight mb-3">Trailer Player</h2>
+                                <div class="font-mono-tech text-[10px] text-gray-400 uppercase tracking-[0.2em] flex items-center gap-3">
+                                    <span class="w-2 h-2 rounded-full bg-accent animate-pulse shadow-[0_0_10px_var(--accent)]"></span> 
+                                    ID: ${id} • TYPE: ${type.toUpperCase()}
+                                </div>
+                            </div>
+                            <div class="w-full md:w-auto" id="player-controls">
+                                <!-- Controls injected -->
+                            </div>
+                        </div>
+                        
+                        <div class="relative w-full aspect-video bg-black rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(var(--accent-rgb),0.15)] border border-white/10 group mb-8 skeleton-container" id="player-container">
+                            ${folderSkeletonInner()}
+                        </div>
+                        <p class="mt-4 font-mono-tech text-[10px] text-center text-gray-500 uppercase tracking-widest opacity-80">If the video fails to load or buffers, pleace reload the page.</p>
+                    </div>
+                `;
+
+                document.getElementById('player-controls').innerHTML = `
+                    <div class="flex gap-3 items-center w-full justify-end">
+                        <button onclick="setView('details', ${id}, '${type}')" class="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-full glass-panel active:scale-95 flex-shrink-0 text-gray-300 outline-none">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </button>
+                    </div>
+                `;
+
+                // https://www.youtube.com/watch?v=${trailer.key}
+                document.getElementById('player-container').innerHTML =  `<iframe id="video-frame" src="https://www.youtube-nocookie.com/embed/${extra1}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="absolute inset-0 w-full h-full z-10 bg-black rounded-3xl transition-opacity duration-1000 transform translate-z-0" frameborder="0" allowfullscreen onload="this.style.opacity='1'" style="opacity:0;"></iframe>`;
+            }
             else if (view === 'search') {
                 app.innerHTML = nav + `
                     <div class="anim-item max-w-5xl mx-auto flex flex-col h-full">
@@ -1233,15 +1316,15 @@
                         </div>
                         <div id="results" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 p-6 overflow-y-auto"></div>
                     </div>`;
-                
+
                 const sInput = document.getElementById('sInput');
                 setTimeout(() => sInput.focus(), 100);
-                
+
                 sInput.addEventListener('input', (e) => {
                     clearTimeout(tempState.searchTimeout);
                     const query = e.target.value.trim();
                     if(query.length < 2) return document.getElementById('results').innerHTML = '';
-                    
+
                     tempState.searchTimeout = setTimeout(() => {
                         fetchAPI(`/search/multi`, `&query=${encodeURIComponent(query)}`).then(res => {
                             if(res?.results) {
@@ -1255,7 +1338,7 @@
                                 setTimeout(() => window.observeLogos(), 100);
                             }
                         });
-                    }, 400); 
+                    }, 400);
                 });
             }
             else if (view === 'watchlist') {
@@ -1270,7 +1353,7 @@
                         <div id="w-list" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">${skeletonCard(6)}</div>
                     </div>
                 `;
-                
+
                 Promise.all(state.watchlist.map(async item => {
                     const res = await fetchAPI(`/${item.type}/${item.id}`);
                     if(res) res.media_type = item.type;
@@ -1278,16 +1361,21 @@
                 })).then(list => {
                     const validList = list.filter(Boolean);
                     const grid = document.getElementById('w-list');
-                    grid.innerHTML = validList.length 
-                        ? validList.map((m, i) => getMediaCard(m, m.media_type, i, `removeFromWatchlist(${m.id}, event)`)).join('') 
+                    grid.innerHTML = validList.length
+                        ? validList.map((m, i) => getMediaCard(m, m.media_type, i, `removeFromWatchlist(${m.id}, event)`)).join('')
                         : '<div class="col-span-full font-mono-tech text-gray-500 py-24 text-center tracking-widest uppercase">Your watchlist is empty.</div>';
                     grid.classList.remove('fade-in'); void grid.offsetWidth; grid.classList.add('fade-in');
                     setTimeout(() => window.observeLogos(), 100);
                 });
             }
         }
-        
-        setView('profiles');
+
+        // Initialization Logic
+        if (API_KEY) {
+            setView('profiles');
+        } else {
+            setView('setup');
+        }
     </script>
 </body>
 </html>
