@@ -692,7 +692,7 @@
         }
 
         async function setView(view, id = null, type = 'movie', extra1 = null, extra2 = null, extra3 = null) {
-            if (!['setup', 'player', 'details', 'createProfile', 'profiles'].includes(view)) state.lastMainView = view;
+            if (!['setup', 'player', 'details', 'createProfile', 'profiles', 'trailer'].includes(view)) state.lastMainView = view;
             if (['details', 'player'].includes(view)) { state.currentMediaId = id; state.currentMediaType = type; }
 
             state.view = view;
