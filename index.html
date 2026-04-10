@@ -223,6 +223,8 @@
         .bottom-sheet.open {
             transform: translateY(0);
         }
+
+        option { background-color: var(--bg-base); }
     </style>
 </head>
 <body class="text-slate-200">
@@ -629,9 +631,9 @@
             const title = esc(m.title || m.name);
             const imgPath = m.poster_path ? IMG_W500 + m.poster_path : '';
             const action = type === 'player'
-                ? (m.season !== undefined ? `setView('player', ${m.id}, 'tv', ${m.season}, ${m.episode})` : `setView('player', ${m.id}, 'movie')`)
+                ? (m.season != undefined ? `setView('player', ${m.id}, 'tv', ${m.season}, ${m.episode})` : `setView('player', ${m.id}, 'movie')`)
                 : `setView('details', ${m.id}, '${type}')`;
-
+            
             const delBtn = deleteActionStr
                 ? `<button onclick="${deleteActionStr}" class="absolute top-3 right-3 z-30 bg-black/60 backdrop-blur-sm border border-white/20 text-white rounded-full min-h-[48px] min-w-[48px] flex items-center justify-center text-xl transition-all active:scale-90 active:bg-red-600 outline-none" title="Remove">&times;</button>`
                 : '';
@@ -690,7 +692,7 @@
         }
 
         async function setView(view, id = null, type = 'movie', extra1 = null, extra2 = null, extra3 = null) {
-            if (!['setup', 'player', 'details', 'createProfile', 'profiles'].includes(view)) state.lastMainView = view;
+            if (!['setup', 'player', 'details', 'createProfile', 'profiles', 'trailer'].includes(view)) state.lastMainView = view;
             if (['details', 'player'].includes(view)) { state.currentMediaId = id; state.currentMediaType = type; }
 
             state.view = view;
@@ -706,7 +708,7 @@
                 </div>` : '';
 
             const nav =['setup', 'profiles', 'createProfile'].includes(view) ? '' : `
-                <nav role="navigation" class="fixed z-[100] glass-panel bottom-0 left-0 w-full h-[calc(4.5rem+env(safe-area-inset-bottom))] pb-[env(safe-area-inset-bottom)] flex justify-around items-center px-2 md:px-4 rounded-t-3xl border-x-0 border-b-0 md:bottom-auto md:top-0 md:left-0 md:w-[6.5rem] md:h-full md:flex-col md:justify-center md:pb-0 md:pt-[env(safe-area-inset-top)] md:rounded-r-3xl md:border-y-0">
+                <nav role="navigation" class="fixed z-[100] glass-panel bottom-0 left-0 w-full h-[calc(4.5rem+env(safe-area-inset-bottom))] pb-[env(safe-area-inset-bottom)] flex justify-around items-center px-2 md:px-4 border-x-0 border-b-0 md:bottom-auto md:top-0 md:left-0 md:w-[6.5rem] md:h-full md:flex-col md:justify-center md:pb-0 md:pt-[env(safe-area-inset-top)] rounded-t-3xl md:rounded-tl-none md:rounded-r-3xl md:border-y-0">
                     <button onclick="setView('home')" class="nav-link min-h-[48px] min-w-[48px] p-2 rounded-xl active:bg-white/10 ${view === 'home' ? 'nav-active text-accent' : ''}" title="Home"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg></button>
                     <button onclick="setView('movies')" class="nav-link min-h-[48px] min-w-[48px] p-2 rounded-xl active:bg-white/10 ${view === 'movies' ? 'nav-active text-accent' : ''}" title="Movies"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"></path></svg></button>
                     <button onclick="setView('shows')" class="nav-link min-h-[48px] min-w-[48px] p-2 rounded-xl active:bg-white/10 ${view === 'shows' ? 'nav-active text-accent' : ''}" title="TV Shows"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg></button>
@@ -1070,14 +1072,14 @@
                                 <div class="flex flex-col md:flex-row gap-6 items-center">
                                     <h3 class="font-mono-tech text-[10px] tracking-[0.2em] text-accent uppercase min-w-max border-r border-white/10 pr-6 hidden md:block">Filters</h3>
                                     <div class="grid grid-cols-2 md:grid-cols-5 gap-4 w-full">
-                                        <select onchange="updateFilter('${targetType}', 'sort_by', this.value)" class="input-glass rounded-lg px-4 font-mono-tech text-[10px] uppercase tracking-widest text-white outline-none w-full">
+                                        <select onchange="updateFilter('${targetType}', 'sort_by', this.value)" class="input-glass rounded-lg px-4 font-mono-tech text-[10px] uppercase tracking-widest text-white outline-none w-full cursor-pointer">
                                             <option value="popularity.desc" ${f.sort_by === 'popularity.desc' ? 'selected' : ''}>Most Popular</option>
                                             <option value="${targetType === 'movie' ? 'primary_release_date.desc' : 'first_air_date.desc'}" ${f.sort_by === (targetType === 'movie' ? 'primary_release_date.desc' : 'first_air_date.desc') ? 'selected' : ''}>Recently Released</option>
                                             <option value="vote_average.desc" ${f.sort_by === 'vote_average.desc' ? 'selected' : ''}>Top Rated</option>
                                         </select>
-                                        <select onchange="updateFilter('${targetType}', 'genre', this.value)" class="input-glass rounded-lg px-4 font-mono-tech text-[10px] uppercase tracking-widest text-white outline-none w-full">${genreOpts}</select>
-                                        <select onchange="updateFilter('${targetType}', 'year', this.value)" class="input-glass rounded-lg px-4 font-mono-tech text-[10px] uppercase tracking-widest text-white outline-none w-full">${yearOpts}</select>
-                                        <select onchange="updateFilter('${targetType}', 'rating', this.value)" class="input-glass rounded-lg px-4 font-mono-tech text-[10px] uppercase tracking-widest text-white outline-none w-full">
+                                        <select onchange="updateFilter('${targetType}', 'genre', this.value)" class="input-glass rounded-lg px-4 font-mono-tech text-[10px] uppercase tracking-widest text-white outline-none w-full cursor-pointer">${genreOpts}</select>
+                                        <select onchange="updateFilter('${targetType}', 'year', this.value)" class="input-glass rounded-lg px-4 font-mono-tech text-[10px] uppercase tracking-widest text-white outline-none w-full cursor-pointer">${yearOpts}</select>
+                                        <select onchange="updateFilter('${targetType}', 'rating', this.value)" class="input-glass rounded-lg px-4 font-mono-tech text-[10px] uppercase tracking-widest text-white outline-none w-full cursor-pointer">
                                             <option value="">ANY RATING</option>
                                             <option value="6" ${f.rating == '6' ? 'selected' : ''}>RATING 6.0+</option>
                                             <option value="8" ${f.rating == '8' ? 'selected' : ''}>RATING 8.0+</option>
@@ -1125,8 +1127,9 @@
                 Promise.all([
                     fetchAPI(`/${type}/${id}`),
                     fetchAPI(`/${type}/${id}/credits`),
-                    fetchAPI(`/${type}/${id}/images`, '&include_image_language=en,null')
-                ]).then(([m, credits, lData]) => {
+                    fetchAPI(`/${type}/${id}/images`, '&include_image_language=en,null'),
+                    fetchAPI(`/${type}/${id}/videos`),
+                ]).then(([m, credits, lData, videos]) => {
                     if (!m) return app.innerHTML = nav + `<div class="text-center p-32 font-mono-tech text-red-500 uppercase tracking-widest">Title not found.</div>`;
 
                     window.tempSeasons = m.seasons ||[];
@@ -1150,14 +1153,25 @@
                         }
                     }
 
+                    let playTrailerAction;
+                    if (videos?.results?.length > 0) {
+                        const trailer = videos.results.find(v => v.type === 'Trailer' && v.site === 'YouTube');
+                        if (trailer) {
+                            playTrailerAction = `setView('trailer', ${id}, '${type}', '${trailer.key}')`;
+                        }
+                    }
+
                     const contentHtml = `
                         <button onclick="setView('${state.lastMainView}')" class="absolute top-[max(1.5rem,env(safe-area-inset-top))] right-[max(1.5rem,env(safe-area-inset-right))] min-w-[48px] min-h-[48px] rounded-full bg-black/50 backdrop-blur-md border border-white/20 flex items-center justify-center text-2xl active:scale-90 z-50 outline-none">&times;</button>
                         <div class="grid lg:grid-cols-[450px,1fr] gap-12 lg:gap-20 relative z-10 pt-[max(2rem,env(safe-area-inset-top))] items-start">
-                            <div class="sticky top-32 glass-panel p-2 rounded-[2rem] overflow-hidden group border border-white/10">
-                                <img src="${m.poster_path ? IMG_W500 + m.poster_path : ''}" loading="lazy" class="w-full rounded-[1.5rem] shadow-2xl transform translate-z-0">
+                            <div class="w-fit h-full lg:h-fit mx-auto sticky top-32 glass-panel p-2 rounded-[2rem] overflow-hidden group border border-white/10">
+                                <img src="${m.poster_path ? IMG_W500 + m.poster_path : ''}" loading="lazy" class="w-auto h-full rounded-[1.5rem] shadow-2xl transform translate-z-0">
+                                ${playTrailerAction ? `<button onclick="${playTrailerAction}" class="btn-glass flex-1 px-8 rounded-2xl font-display font-bold text-sm tracking-widest uppercase flex items-center justify-center gap-3 text-white absolute bottom-6 right-6">
+                                    Watch Trailer
+                                </button>` : ''}
                             </div>
                             
-                            <div class="pt-4 z-10" style="background: linear-gradient(0deg, var(--bg-base) 70%, transparent 100%);">
+                            <div class="mt-4 pt-4 z-10" style="background: linear-gradient(0deg, var(--bg-base) 70%, transparent 100%);">
                                 <div class="w-full mb-6">${detailsTitleHtml}</div>
                                 
                                 ${m.tagline ? `<p class="font-mono-tech text-sm uppercase tracking-[0.2em] text-accent mb-8 border-l-2 border-accent pl-4 py-1">${esc(m.tagline)}</p>` : '<div class="h-8"></div>'}
@@ -1252,6 +1266,42 @@
 
                     document.getElementById('player-container').innerHTML = `<iframe id="video-frame" src="${window.currentSources[0].url}" class="absolute inset-0 w-full h-full z-10 bg-black rounded-3xl transition-opacity duration-1000 transform translate-z-0" frameborder="0" allowfullscreen onload="this.style.opacity='1'" style="opacity:0;"></iframe>`;
                 });
+            }
+            else if (view === 'trailer') {
+                if (!extra1) setView('details', id, type);
+
+                app.innerHTML = nav + `
+                    <div class="w-full max-w-[1400px] mx-auto anim-item relative z-10 pt-[max(1.5rem,env(safe-area-inset-top))]">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-6 border-b border-white/10 pb-6">
+                            <div>
+                                <h2 class="font-display text-2xl md:text-4xl font-bold text-white tracking-tight mb-3">Trailer Player</h2>
+                                <div class="font-mono-tech text-[10px] text-gray-400 uppercase tracking-[0.2em] flex items-center gap-3">
+                                    <span class="w-2 h-2 rounded-full bg-accent animate-pulse shadow-[0_0_10px_var(--accent)]"></span> 
+                                    ID: ${id} • TYPE: ${type.toUpperCase()}
+                                </div>
+                            </div>
+                            <div class="w-full md:w-auto" id="player-controls">
+                                <!-- Controls injected -->
+                            </div>
+                        </div>
+                        
+                        <div class="relative w-full aspect-video bg-black rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(var(--accent-rgb),0.15)] border border-white/10 group mb-8 skeleton-container" id="player-container">
+                            ${folderSkeletonInner()}
+                        </div>
+                        <p class="mt-4 font-mono-tech text-[10px] text-center text-gray-500 uppercase tracking-widest opacity-80">If the video fails to load or buffers, pleace reload the page.</p>
+                    </div>
+                `;
+
+                document.getElementById('player-controls').innerHTML = `
+                    <div class="flex gap-3 items-center w-full justify-end">
+                        <button onclick="setView('details', ${id}, '${type}')" class="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-full glass-panel active:scale-95 flex-shrink-0 text-gray-300 outline-none">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </button>
+                    </div>
+                `;
+
+                // https://www.youtube.com/watch?v=${trailer.key}
+                document.getElementById('player-container').innerHTML =  `<iframe id="video-frame" src="https://www.youtube-nocookie.com/embed/${extra1}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="absolute inset-0 w-full h-full z-10 bg-black rounded-3xl transition-opacity duration-1000 transform translate-z-0" frameborder="0" allowfullscreen onload="this.style.opacity='1'" style="opacity:0;"></iframe>`;
             }
             else if (view === 'search') {
                 app.innerHTML = nav + `
